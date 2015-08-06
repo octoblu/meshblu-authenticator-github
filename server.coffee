@@ -8,13 +8,16 @@ passport = require 'passport'
 Router = require './app/routes'
 Config = require './app/config'
 MeshbluDB = require 'meshblu-db'
+MeshbluConfig = require 'meshblu-config'
+meshbluHealthcheck = require 'express-meshblu-healthcheck'
 
 airbrake = require('airbrake').createClient process.env.AIRBRAKE_API_KEY
 debug = require('debug')('meshblu-github-authenticator:server')
 
-port = process.env.MESHBLU_GITHUB_AUTHENTICATOR_PORT ? 8008
+port = process.env.MESHBLU_GITHUB_AUTHENTICATOR_PORT ? process.env.PORT ? 80
 
 app = express()
+app.use meshbluHealthcheck()
 app.use morgan('dev')
 app.use errorHandler()
 app.use airbrake.expressHandler()
@@ -42,15 +45,8 @@ app.set 'view engine', 'html'
 
 app.set 'views', __dirname + '/app/views'
 
-try
-  meshbluJSON  = require './meshblu.json'
-catch
-  meshbluJSON =
-    uuid:   process.env.MESHBLU_GITHUB_AUTHENTICATOR_UUID
-    token:  process.env.MESHBLU_GITHUB_AUTHENTICATOR_TOKEN
-    server: process.env.MESHBLU_HOST
-    port:   process.env.MESHBLU_PORT
-    name:   'Github Authenticator'
+meshbluJSON = new MeshbluConfig().toJSON()
+meshbluJSON.name = 'Github Authenticator'
 
 meshbludb = new MeshbluDB meshbluJSON
 
