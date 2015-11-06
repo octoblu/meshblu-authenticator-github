@@ -46,7 +46,7 @@ app.set 'view engine', 'html'
 app.set 'views', __dirname + '/app/views'
 
 meshbluJSON = new MeshbluConfig().toJSON()
-meshbluJSON.name = 'Github Authenticator'
+meshbluJSON.name = process.env.MESHBLU_GITHUB_AUTHENTICATOR_NAME ? 'Github Authenticator'
 
 meshbludb = new MeshbluDB meshbluJSON
 
