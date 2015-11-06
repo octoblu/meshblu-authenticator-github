@@ -17,9 +17,9 @@ debug = require('debug')('meshblu-github-authenticator:server')
 port = process.env.MESHBLU_GITHUB_AUTHENTICATOR_PORT ? process.env.PORT ? 80
 
 app = express()
-app.use meshbluHealthcheck()
 app.use morgan('dev')
 app.use errorHandler()
+app.use meshbluHealthcheck()
 app.use airbrake.expressHandler()
 app.use bodyParser.json()
 app.use bodyParser.urlencoded(extended: true)

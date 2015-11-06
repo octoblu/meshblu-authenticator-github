@@ -1,6 +1,6 @@
 {
-  "name": "meshblu-github-authenticator",
-  "version": "2.0.0",
+  "name": "meshblu-authenticator-github",
+  "version": "2.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/octoblu/meshblu-github-authenticator.git"
+    "url": "https://github.com/octoblu/meshblu-authenticator-github.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/octoblu/meshblu-github-authenticator/issues"
+    "url": "https://github.com/octoblu/meshblu-authenticator-github/issues"
   },
-  "homepage": "https://github.com/octoblu/meshblu-github-authenticator",
+  "homepage": "https://github.com/octoblu/meshblu-authenticator-github",
   "devDependencies": {
     "chai": "^2.1.0",
     "coffee-script": "^1.9.1",
