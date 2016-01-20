@@ -9,16 +9,16 @@ githubOauthConfig =
   callbackURL: process.env.GITHUB_CALLBACK_URL
   passReqToCallback: true
 
-
 class GithubConfig
-  constructor: (@meshbludb, @meshbluJSON) ->
+  constructor: (@meshbluHttp, @meshbluJSON) ->
 
   onAuthentication: (request, accessToken, refreshToken, profile, done) =>
     profileId = profile?.id
     fakeSecret = 'github-authenticator'
     authenticatorUuid = @meshbluJSON.uuid
     authenticatorName = @meshbluJSON.name
-    deviceModel = new DeviceAuthenticator authenticatorUuid, authenticatorName, meshbludb: @meshbludb
+
+    deviceModel = new DeviceAuthenticator {authenticatorUuid, authenticatorName, @meshbluHttp}
     query = {}
     query[authenticatorUuid + '.id'] = profileId
     device =
@@ -37,9 +37,14 @@ class GithubConfig
     deviceFindCallback = (error, foundDevice) =>
       # return done error if error?
       return getDeviceToken foundDevice.uuid if foundDevice?
-      deviceModel.create query, device, profileId, fakeSecret, deviceCreateCallback
+      deviceModel.create
+        query: query
+        data: device
+        user_id: profileId
+        secret: fakeSecret
+      , deviceCreateCallback
 
-    deviceModel.findVerified query, fakeSecret, deviceFindCallback
+    deviceModel.findVerified query: query, password: fakeSecret, deviceFindCallback
 
   register: =>
     passport.use new GithubStrategy githubOauthConfig, @onAuthentication

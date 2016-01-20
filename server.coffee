@@ -7,7 +7,7 @@ session = require 'cookie-session'
 passport = require 'passport'
 Router = require './app/routes'
 Config = require './app/config'
-MeshbluDB = require 'meshblu-db'
+MeshbluHttp = require 'meshblu-http'
 MeshbluConfig = require 'meshblu-config'
 meshbluHealthcheck = require 'express-meshblu-healthcheck'
 
@@ -48,12 +48,16 @@ app.set 'views', __dirname + '/app/views'
 meshbluJSON = new MeshbluConfig().toJSON()
 meshbluJSON.name = process.env.MESHBLU_GITHUB_AUTHENTICATOR_NAME ? 'Github Authenticator'
 
-meshbludb = new MeshbluDB meshbluJSON
+meshbluHttp = new MeshbluHttp meshbluJSON
 
-meshbludb.findOne uuid: meshbluJSON.uuid, (error, device) ->
+meshbluHttp.device meshbluJSON.uuid, (error, device) ->
+  if error?
+    console.error error.message, error.stack
+    process.exit 1
+
   meshbludb.setPrivateKey(device.privateKey) unless meshbludb.privateKey
 
-config = new Config meshbludb, meshbluJSON
+config = new Config meshbluHttp, meshbluJSON
 config.register()
 
 router = new Router app
