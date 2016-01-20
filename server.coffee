@@ -57,7 +57,7 @@ meshbluHttp.device meshbluJSON.uuid, (error, device) ->
 
   meshbludb.setPrivateKey(device.privateKey) unless meshbludb.privateKey
 
-config = new Config meshbluHttp, meshbluJSON
+config = new Config {meshbluHttp, meshbluJSON}
 config.register()
 
 router = new Router app

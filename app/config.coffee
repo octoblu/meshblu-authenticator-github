@@ -10,7 +10,7 @@ githubOauthConfig =
   passReqToCallback: true
 
 class GithubConfig
-  constructor: (@meshbluHttp, @meshbluJSON) ->
+  constructor: ({@meshbluHttp, @meshbluJSON}) ->
 
   onAuthentication: (request, accessToken, refreshToken, profile, done) =>
     profileId = profile?.id
