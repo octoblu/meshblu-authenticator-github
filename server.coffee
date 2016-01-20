@@ -55,7 +55,7 @@ meshbluHttp.device meshbluJSON.uuid, (error, device) ->
     console.error error.message, error.stack
     process.exit 1
 
-  meshbludb.setPrivateKey(device.privateKey) unless meshbludb.privateKey
+  meshbluHttp.setPrivateKey(device.privateKey) unless meshbluHttp.privateKey
 
 config = new Config {meshbluHttp, meshbluJSON}
 config.register()
