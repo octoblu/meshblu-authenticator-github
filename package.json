@@ -1,6 +1,6 @@
 {
   "name": "meshblu-authenticator-github",
-  "version": "2.0.12",
+  "version": "2.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -38,7 +38,7 @@
     "express-meshblu-healthcheck": "^1.0.1",
     "express-session": "^1.10.3",
     "lodash": "^3.3.1",
-    "meshblu-authenticator-core": "^3.1.1",
+    "meshblu-authenticator-core": "^3.2.0",
     "meshblu-config": "^2.2.0",
     "meshblu-http": "^5.0.1",
     "morgan": "^1.5.1",
