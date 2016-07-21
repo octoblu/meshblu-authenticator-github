@@ -1,6 +1,6 @@
 {
   "name": "meshblu-authenticator-github",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -37,13 +37,14 @@
     "express": "^4.12.0",
     "express-meshblu-healthcheck": "^1.0.1",
     "express-package-version": "0.0.2",
+    "express-send-error": "^1.1.0",
     "express-session": "^1.10.3",
     "lodash": "^3.3.1",
     "meshblu-authenticator-core": "^3.2.0",
     "meshblu-config": "^2.2.0",
     "meshblu-http": "^5.0.1",
     "morgan": "^1.5.1",
-    "octoblu-raven": "^2.1.1",
+    "octoblu-raven": "^3.0.1",
     "passport": "^0.2.1",
     "passport-github": "git://github.com/jaredhanson/passport-github.git"
   }
