@@ -27,3 +27,4 @@ node_modules
 # Users Environment Variables
 .lock-wscript
 weather-service.sublime-workspace
+.nyc_output
